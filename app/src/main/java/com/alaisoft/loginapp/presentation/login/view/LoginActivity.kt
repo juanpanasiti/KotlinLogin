@@ -7,13 +7,16 @@ import android.widget.Toast
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
 import com.alaisoft.loginapp.presentation.login.LoginContract
+import com.alaisoft.loginapp.presentation.login.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(), LoginContract.LoginView {
+class LoginActivity : BaseActivity(), LoginContract.LoginView {
 
+    lateinit var presenter:LoginPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        presenter = LoginPresenter()
+        presenter.attachView(this)
         btn_login.setOnClickListener {
             signIn()
         }
@@ -38,7 +41,20 @@ class MainActivity : BaseActivity(), LoginContract.LoginView {
     }//hideProgressBar()
 
     override fun signIn() {
-        toast(this,"Prueba de login")
+        val email = et_email.text.toString().trim()
+        val password = et_password.text.toString().trim()
+        if(presenter.checkEmptyFields(email,password))
+            toast(this,"Uno o mas campos vacíos")
+        else
+            presenter.signInUserWithEmailAndPassword(email,password)
     }//signIn()
 
-}//MainActivity
+    override fun navigateToMain() {
+        //startActivity(Intent(...)
+    }
+
+    override fun navigateToRegister() {
+        //startActivity(Intent(...)
+    }
+
+}//LoginActivity
