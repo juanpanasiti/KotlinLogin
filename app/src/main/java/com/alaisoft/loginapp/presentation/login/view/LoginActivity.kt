@@ -1,10 +1,8 @@
 package com.alaisoft.loginapp.presentation.login.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
 import com.alaisoft.loginapp.domain.interactor.logininteractor.SignInInteractorImpl
@@ -53,7 +51,9 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
     }//signIn()
 
     override fun navigateToMain() {
-        startActivity(Intent(this,HomeActivity::class.java))
+        val intent = Intent(this,HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     override fun navigateToRegister() {
