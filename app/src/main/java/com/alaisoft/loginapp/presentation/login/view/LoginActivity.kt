@@ -1,5 +1,6 @@
 package com.alaisoft.loginapp.presentation.login.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import com.alaisoft.loginapp.base.BaseActivity
 import com.alaisoft.loginapp.domain.interactor.logininteractor.SignInInteractorImpl
 import com.alaisoft.loginapp.presentation.login.LoginContract
 import com.alaisoft.loginapp.presentation.login.presenter.LoginPresenter
+import com.alaisoft.loginapp.presentation.main.view.HomeActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class LoginActivity : BaseActivity(), LoginContract.LoginView {
@@ -51,11 +53,11 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
     }//signIn()
 
     override fun navigateToMain() {
-        //startActivity(Intent(...)
+        startActivity(Intent(this,HomeActivity::class.java))
     }
 
     override fun navigateToRegister() {
-        //startActivity(Intent(...)
+        //startActivity(Intent(this,HomeActivity::class.java))
     }
 
 }//LoginActivity
