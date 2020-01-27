@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
+import com.alaisoft.loginapp.domain.interactor.logininteractor.SignInInteractorImpl
 import com.alaisoft.loginapp.presentation.login.LoginContract
 import com.alaisoft.loginapp.presentation.login.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,7 +16,7 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
     lateinit var presenter:LoginPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = LoginPresenter()
+        presenter = LoginPresenter(SignInInteractorImpl())
         presenter.attachView(this)
         btn_login.setOnClickListener {
             signIn()

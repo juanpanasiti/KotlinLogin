@@ -1,11 +1,16 @@
 package com.alaisoft.loginapp.presentation.login.presenter
 
+import com.alaisoft.loginapp.domain.interactor.logininteractor.SignInInteractor
 import com.alaisoft.loginapp.presentation.login.LoginContract
 import com.alaisoft.loginapp.presentation.login.LoginContract.LoginView
 
-class LoginPresenter() : LoginContract.LoginPresenter{
+class LoginPresenter(signInInteractor:SignInInteractor) : LoginContract.LoginPresenter{
 
     var view: LoginView? = null
+    var signInInteractor : SignInInteractor? = null
+    init {
+        this.signInInteractor = signInInteractor
+    }
 
     override fun attachView(view: LoginView) {
         this.view = view
@@ -21,7 +26,21 @@ class LoginPresenter() : LoginContract.LoginPresenter{
 
     override fun signInUserWithEmailAndPassword(email: String, password: String) {
         view?.showProgressBar()
-        view?.showError("Hola desde el presenter")
+        signInInteractor?.signInWithEmailAndPassword(email,password,object: SignInInteractor.SignInCallback{
+            override fun onSignInSuccess() {
+                if(isViewAttached()){
+                    view?.hideProgressBar()
+                    view?.navigateToMain()
+                }
+            }//onSignInSuccess()
+
+            override fun onSignInFailure(errorMsg: String) {
+                if(isViewAttached()){
+                    view?.hideProgressBar()
+                    view?.showError(errorMsg)
+                }
+            }
+        })//onSignInFailure()
     }//signInUserWithEmailAndPassword()
 
     override fun checkEmptyFields(email: String, password: String):Boolean {
