@@ -7,12 +7,12 @@ interface LoginContract {
         fun hideProgressBar()
         fun signIn()
         fun navigateToMain()
-        fun navigateToRegister()
+        fun navigateToSignUp()
     }//LoginVIew
 
     interface LoginPresenter {
         fun attachView(view:LoginView)
-        fun dettachView()
+        fun detachView()
         fun isViewAttached():Boolean
         fun signInUserWithEmailAndPassword(email:String,password:String)
         fun checkEmptyFields(email:String,password:String):Boolean

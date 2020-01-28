@@ -16,7 +16,7 @@ class LoginPresenter(signInInteractor:SignInInteractor) : LoginContract.LoginPre
         this.view = view
     }//attachView()
 
-    override fun dettachView() {
+    override fun detachView() {
         this.view = null
     }//dettachView()
 
