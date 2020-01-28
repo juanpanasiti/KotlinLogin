@@ -9,7 +9,8 @@ import com.alaisoft.loginapp.domain.interactor.logininteractor.SignInInteractorI
 import com.alaisoft.loginapp.presentation.login.LoginContract
 import com.alaisoft.loginapp.presentation.login.presenter.LoginPresenter
 import com.alaisoft.loginapp.presentation.main.view.HomeActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.alaisoft.loginapp.presentation.signup.view.SignUpActivity
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), LoginContract.LoginView {
 
@@ -18,13 +19,18 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
         super.onCreate(savedInstanceState)
         presenter = LoginPresenter(SignInInteractorImpl())
         presenter.attachView(this)
+
         btn_login.setOnClickListener {
             signIn()
+        }//btn listener
+
+        txt_linkSignUp.setOnClickListener {
+            navigateToSignUp()
         }
     }//onCreate()
 
     override fun getLayout(): Int {
-        return R.layout.activity_main
+        return R.layout.activity_login
     }//getLayout()
 
     override fun showError(msgError: String) {
@@ -56,8 +62,20 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
         startActivity(intent)
     }
 
-    override fun navigateToRegister() {
-        //startActivity(Intent(this,HomeActivity::class.java))
+    override fun navigateToSignUp() {
+        val intent = Intent(this,SignUpActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        presenter.detachView()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
     }
 
 }//LoginActivity
