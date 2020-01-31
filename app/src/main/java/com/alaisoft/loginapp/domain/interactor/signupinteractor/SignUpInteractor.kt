@@ -6,5 +6,5 @@ interface SignUpInteractor {
         fun onSignUpFailure(errorMsg:String)
     }
 
-    fun signUp(fullname:String, email:String, password:String, listener:SignUpInteractor)
+    fun signUp(fullname:String, email:String, password:String, listener:SignUpInteractor.SignUpCallback)
 }
