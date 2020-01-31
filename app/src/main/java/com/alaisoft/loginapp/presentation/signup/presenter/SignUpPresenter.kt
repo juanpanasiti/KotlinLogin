@@ -1,11 +1,18 @@
 package com.alaisoft.loginapp.presentation.signup.presenter
 
 import androidx.core.util.PatternsCompat
+import com.alaisoft.loginapp.domain.interactor.signupinteractor.SignUpInteractor
 import com.alaisoft.loginapp.presentation.signup.SignUpContract
 
-class SignUpPresenter : SignUpContract.SignUpPresenter{
+class SignUpPresenter(signUpInteractor: SignUpInteractor) : SignUpContract.SignUpPresenter{
 
     var view:SignUpContract.SignUpView? = null
+    var signUpInteractor:SignUpInteractor? = null
+
+    init {
+        this.signUpInteractor = signUpInteractor
+    }
+
     override fun attachView(view: SignUpContract.SignUpView) {
         this.view = view
     }
@@ -31,6 +38,17 @@ class SignUpPresenter : SignUpContract.SignUpPresenter{
     }
 
     override fun signUp(fullname: String, email: String, password: String) {
-        //Aca hay que llamar al interactor para
+        view?.showProgressBar()
+        signUpInteractor?.signUp(fullname,email,password,object: SignUpInteractor.SignUpCallback{
+            override fun onSignUpSuccess() {
+                view?.hideProgressBar()
+                view?.navigateToMain()
+            }
+
+            override fun onSignUpFailure(errorMsg: String) {
+                view?.hideProgressBar()
+                view?.showError(errorMsg)
+            }
+        })
     }
 }

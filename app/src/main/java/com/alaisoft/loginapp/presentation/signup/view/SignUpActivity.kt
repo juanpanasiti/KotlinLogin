@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
+import com.alaisoft.loginapp.domain.interactor.signupinteractor.SignUpInteractorImpl
 import com.alaisoft.loginapp.presentation.login.view.LoginActivity
 import com.alaisoft.loginapp.presentation.main.view.HomeActivity
 import com.alaisoft.loginapp.presentation.signup.SignUpContract
@@ -17,8 +18,12 @@ class SignUpActivity : BaseActivity(), SignUpContract.SignUpView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = SignUpPresenter()
+        presenter = SignUpPresenter(SignUpInteractorImpl())
         presenter.attachView(this)
+
+        btn_signup.setOnClickListener {
+            signUp()
+        }//listener boton de registro
 
         txt_linkLogin.setOnClickListener {
             navigateToLogin()
@@ -42,7 +47,36 @@ class SignUpActivity : BaseActivity(), SignUpContract.SignUpView {
     }
 
     override fun signUp() {
+        val fullname:String = et_fullname.text.toString().trim()
+        val email:String = et_email.text.toString().trim()
+        val password1:String = et_pass1.text.toString().trim()
+        val password2:String = et_pass2.text.toString().trim()
+        var countErrors:Int = 0
 
+        if(presenter.checkEmptyFullname(fullname)){
+            et_fullname.error = "El nombre no puede estar vacío"
+            countErrors++
+        }
+        if(!presenter.checkValidEmail(email)){
+            et_email.error = "El E-mail es inválido"
+            countErrors++
+        }
+        if(!presenter.checkPasswords(password1,password2)){
+            et_pass1.error = "Las contraseñas no cumplen con los requisitos"
+            countErrors++
+        }
+
+        if(countErrors > 0){
+            lateinit var errorWord:String;
+            if(countErrors > 1)
+                errorWord = "errores"
+            else
+                errorWord = "error"
+            showError("Hay $countErrors $errorWord en el formulario de registro.")
+            return
+        }
+
+        presenter.signUp(fullname,email,password1)
     }
 
     override fun showProgressBar() {
