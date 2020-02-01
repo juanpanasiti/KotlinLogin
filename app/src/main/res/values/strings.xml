@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LoginApp</string>
+    <string name="signUpTitle">Registro</string>
+    <string name="fullname_field">Nombre Completo</string>
+    <string name="repeat_password_field">Repetir Password</string>
+    <string name="signUpButtonName">Registrarme</string>
+    <string name="i_have_an_account_link">Ya tengo una cuenta.</string>
 </resources>
