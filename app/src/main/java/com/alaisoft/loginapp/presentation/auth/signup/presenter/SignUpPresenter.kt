@@ -1,7 +1,7 @@
 package com.alaisoft.loginapp.presentation.auth.signup.presenter
 
 import androidx.core.util.PatternsCompat
-import com.alaisoft.loginapp.domain.interactor.signupinteractor.SignUpInteractor
+import com.alaisoft.loginapp.domain.interactor.auth.signupinteractor.SignUpInteractor
 import com.alaisoft.loginapp.presentation.auth.signup.SignUpContract
 import com.alaisoft.loginapp.presentation.auth.signup.exceptions.FirebaseSignUpException
 import kotlinx.coroutines.*

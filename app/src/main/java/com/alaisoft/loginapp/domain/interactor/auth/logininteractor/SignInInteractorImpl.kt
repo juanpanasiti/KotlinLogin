@@ -1,4 +1,4 @@
-package com.alaisoft.loginapp.domain.interactor.logininteractor
+package com.alaisoft.loginapp.domain.interactor.auth.logininteractor
 
 import com.alaisoft.loginapp.presentation.auth.login.exceptions.FirebaseLoginException
 import com.google.firebase.auth.FirebaseAuth

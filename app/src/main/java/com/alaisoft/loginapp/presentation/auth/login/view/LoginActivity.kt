@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.View
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
-import com.alaisoft.loginapp.domain.interactor.logininteractor.SignInInteractorImpl
+import com.alaisoft.loginapp.domain.interactor.auth.logininteractor.SignInInteractorImpl
+import com.alaisoft.loginapp.domain.interactor.auth.passwordrecoverinteractor.PasswordRecoverImpl
 import com.alaisoft.loginapp.presentation.auth.login.LoginContract
 import com.alaisoft.loginapp.presentation.auth.login.presenter.LoginPresenter
+import com.alaisoft.loginapp.presentation.auth.passwordrecover.view.PasswordRecoveryActivity
 import com.alaisoft.loginapp.presentation.main.view.HomeActivity
 import com.alaisoft.loginapp.presentation.auth.signup.view.SignUpActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -27,6 +29,9 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
         txt_linkSignUp.setOnClickListener {
             navigateToSignUp()
         }
+        txt_pass_recovery_link.setOnClickListener {
+            navigateToRecoverPassword()
+        }
     }//onCreate()
 
     override fun getLayout(): Int {
@@ -39,12 +44,12 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
 
     override fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
-        btn_login.isEnabled = false
+        btn_login.visibility = View.GONE
     }//showProgressBar()
 
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
-        btn_login.isEnabled = true
+        btn_login.visibility = View.VISIBLE
     }//hideProgressBar()
 
     override fun signIn() {
@@ -64,6 +69,11 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
 
     override fun navigateToSignUp() {
         val intent = Intent(this,SignUpActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
+    override fun navigateToRecoverPassword() {
+        val intent = Intent(this,PasswordRecoveryActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }

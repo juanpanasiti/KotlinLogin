@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
-import com.alaisoft.loginapp.domain.interactor.signupinteractor.SignUpInteractorImpl
+import com.alaisoft.loginapp.domain.interactor.auth.signupinteractor.SignUpInteractorImpl
 import com.alaisoft.loginapp.presentation.auth.login.view.LoginActivity
 import com.alaisoft.loginapp.presentation.main.view.HomeActivity
 import com.alaisoft.loginapp.presentation.auth.signup.SignUpContract

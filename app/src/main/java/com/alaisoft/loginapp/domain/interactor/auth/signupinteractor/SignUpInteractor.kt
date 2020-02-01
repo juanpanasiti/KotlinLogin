@@ -1,4 +1,4 @@
-package com.alaisoft.loginapp.domain.interactor.signupinteractor
+package com.alaisoft.loginapp.domain.interactor.auth.signupinteractor
 
 interface SignUpInteractor {
 

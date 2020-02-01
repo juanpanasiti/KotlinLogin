@@ -1,6 +1,6 @@
 package com.alaisoft.loginapp.presentation.auth.login.presenter
 
-import com.alaisoft.loginapp.domain.interactor.logininteractor.SignInInteractor
+import com.alaisoft.loginapp.domain.interactor.auth.logininteractor.SignInInteractor
 import com.alaisoft.loginapp.presentation.auth.login.LoginContract
 import com.alaisoft.loginapp.presentation.auth.login.LoginContract.LoginView
 import com.alaisoft.loginapp.presentation.auth.login.exceptions.FirebaseLoginException

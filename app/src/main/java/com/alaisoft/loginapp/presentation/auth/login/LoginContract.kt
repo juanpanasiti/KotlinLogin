@@ -8,6 +8,7 @@ interface LoginContract {
         fun signIn()
         fun navigateToMain()
         fun navigateToSignUp()
+        fun navigateToRecoverPassword()
     }//LoginVIew
 
     interface LoginPresenter {
