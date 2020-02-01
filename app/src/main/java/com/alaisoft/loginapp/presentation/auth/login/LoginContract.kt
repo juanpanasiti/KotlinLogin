@@ -1,4 +1,4 @@
-package com.alaisoft.loginapp.presentation.login
+package com.alaisoft.loginapp.presentation.auth.login
 
 interface LoginContract {
     interface LoginView {

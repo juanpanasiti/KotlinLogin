@@ -1,9 +1,9 @@
-package com.alaisoft.loginapp.presentation.login.presenter
+package com.alaisoft.loginapp.presentation.auth.login.presenter
 
 import com.alaisoft.loginapp.domain.interactor.logininteractor.SignInInteractor
-import com.alaisoft.loginapp.presentation.login.LoginContract
-import com.alaisoft.loginapp.presentation.login.LoginContract.LoginView
-import com.alaisoft.loginapp.presentation.login.exceptions.FirebaseLoginException
+import com.alaisoft.loginapp.presentation.auth.login.LoginContract
+import com.alaisoft.loginapp.presentation.auth.login.LoginContract.LoginView
+import com.alaisoft.loginapp.presentation.auth.login.exceptions.FirebaseLoginException
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 

@@ -1,4 +1,4 @@
-package com.alaisoft.loginapp.presentation.signup
+package com.alaisoft.loginapp.presentation.auth.signup
 
 interface SignUpContract {
 

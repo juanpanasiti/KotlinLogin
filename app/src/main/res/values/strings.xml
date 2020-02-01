@@ -11,4 +11,8 @@
     <string name="login_button">LOGEARME</string>
     <string name="i_need_an_account_link">No tengo cuenta.</string>
     <string name="welcome_title">Bienvenido</string>
+    <string name="pass_recovery_link">Olvidé mi contraseña</string>
+    <string name="pass_recovery_title">Recuperar Contraseña</string>
+    <string name="recovery_email_field_hint">recovery@email.com</string>
+    <string name="pass_recovery_button">Recuperar contraseña</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.alaisoft.loginapp.domain.interactor.logininteractor
 
-import com.alaisoft.loginapp.presentation.login.exceptions.FirebaseLoginException
+import com.alaisoft.loginapp.presentation.auth.login.exceptions.FirebaseLoginException
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume

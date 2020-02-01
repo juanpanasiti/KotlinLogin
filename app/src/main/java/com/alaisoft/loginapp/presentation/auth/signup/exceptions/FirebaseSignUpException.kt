@@ -1,4 +1,4 @@
-package com.alaisoft.loginapp.presentation.signup.exceptions
+package com.alaisoft.loginapp.presentation.auth.signup.exceptions
 
 class FirebaseSignUpException(message:String?):Exception(message) {
 }

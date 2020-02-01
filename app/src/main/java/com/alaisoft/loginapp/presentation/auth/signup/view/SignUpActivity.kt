@@ -1,4 +1,4 @@
-package com.alaisoft.loginapp.presentation.signup.view
+package com.alaisoft.loginapp.presentation.auth.signup.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,10 @@ import android.view.View
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
 import com.alaisoft.loginapp.domain.interactor.signupinteractor.SignUpInteractorImpl
-import com.alaisoft.loginapp.presentation.login.view.LoginActivity
+import com.alaisoft.loginapp.presentation.auth.login.view.LoginActivity
 import com.alaisoft.loginapp.presentation.main.view.HomeActivity
-import com.alaisoft.loginapp.presentation.signup.SignUpContract
-import com.alaisoft.loginapp.presentation.signup.presenter.SignUpPresenter
+import com.alaisoft.loginapp.presentation.auth.signup.SignUpContract
+import com.alaisoft.loginapp.presentation.auth.signup.presenter.SignUpPresenter
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : BaseActivity(), SignUpContract.SignUpView {
