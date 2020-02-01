@@ -5,4 +5,9 @@
     <string name="repeat_password_field">Repetir Password</string>
     <string name="signUpButtonName">Registrarme</string>
     <string name="i_have_an_account_link">Ya tengo una cuenta.</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="email_field">email</string>
+    <string name="password_field">contraseña</string>
+    <string name="login_button">LOGEARME</string>
+    <string name="i_need_an_account_link">No tengo cuenta.</string>
 </resources>
