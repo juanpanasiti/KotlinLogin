@@ -10,4 +10,5 @@
     <string name="password_field">contraseña</string>
     <string name="login_button">LOGEARME</string>
     <string name="i_need_an_account_link">No tengo cuenta.</string>
+    <string name="welcome_title">Bienvenido</string>
 </resources>
