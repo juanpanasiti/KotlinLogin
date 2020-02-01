@@ -3,11 +3,19 @@ package com.alaisoft.loginapp.presentation.signup.presenter
 import androidx.core.util.PatternsCompat
 import com.alaisoft.loginapp.domain.interactor.signupinteractor.SignUpInteractor
 import com.alaisoft.loginapp.presentation.signup.SignUpContract
+import com.alaisoft.loginapp.presentation.signup.exceptions.FirebaseSignUpException
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class SignUpPresenter(signUpInteractor: SignUpInteractor) : SignUpContract.SignUpPresenter{
+class SignUpPresenter(signUpInteractor: SignUpInteractor) : SignUpContract.SignUpPresenter,
+    CoroutineScope {
 
     var view:SignUpContract.SignUpView? = null
     var signUpInteractor:SignUpInteractor? = null
+
+    private val job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     init {
         this.signUpInteractor = signUpInteractor
@@ -25,6 +33,10 @@ class SignUpPresenter(signUpInteractor: SignUpInteractor) : SignUpContract.SignU
         this.view = null
     }
 
+    override fun detachJob() {
+        coroutineContext.cancel()
+    }//detachJob()
+
     override fun checkEmptyFullname(fullname: String): Boolean {
         return fullname.isEmpty()
     }
@@ -38,17 +50,25 @@ class SignUpPresenter(signUpInteractor: SignUpInteractor) : SignUpContract.SignU
     }
 
     override fun signUp(fullname: String, email: String, password: String) {
-        view?.showProgressBar()
-        signUpInteractor?.signUp(fullname,email,password,object: SignUpInteractor.SignUpCallback{
-            override fun onSignUpSuccess() {
-                view?.hideProgressBar()
-                view?.navigateToMain()
+
+        launch {
+            view?.showProgressBar()
+
+            try{
+                signUpInteractor?.signUp(fullname,email,password)
+
+                if(isViewAttached()){
+                    view?.hideProgressBar()
+                    view?.navigateToMain()
+                }
+            }catch(e:FirebaseSignUpException){
+                if(isViewAttached()){
+                    view?.showError(e.message)
+                    view?.hideProgressBar()
+                }
             }
 
-            override fun onSignUpFailure(errorMsg: String) {
-                view?.hideProgressBar()
-                view?.showError(errorMsg)
-            }
-        })
+        }//launch
+
     }
 }

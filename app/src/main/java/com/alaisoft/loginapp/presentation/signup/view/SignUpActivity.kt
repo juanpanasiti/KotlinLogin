@@ -89,17 +89,19 @@ class SignUpActivity : BaseActivity(), SignUpContract.SignUpView {
         btn_signup.visibility = View.VISIBLE
     }
 
-    override fun showError(errorMsg:String) {
+    override fun showError(errorMsg:String?) {
         toast(this,errorMsg)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         presenter.detachView()
+        presenter.detachJob()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
+        presenter.detachJob()
     }
 }
