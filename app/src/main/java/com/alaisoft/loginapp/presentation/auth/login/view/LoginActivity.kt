@@ -6,12 +6,11 @@ import android.view.View
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
 import com.alaisoft.loginapp.domain.interactor.auth.logininteractor.SignInInteractorImpl
-import com.alaisoft.loginapp.domain.interactor.auth.passwordrecoverinteractor.PasswordRecoverImpl
 import com.alaisoft.loginapp.presentation.auth.login.LoginContract
 import com.alaisoft.loginapp.presentation.auth.login.presenter.LoginPresenter
 import com.alaisoft.loginapp.presentation.auth.passwordrecover.view.PasswordRecoveryActivity
-import com.alaisoft.loginapp.presentation.main.view.HomeActivity
 import com.alaisoft.loginapp.presentation.auth.signup.view.SignUpActivity
+import com.alaisoft.loginapp.presentation.main.view.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), LoginContract.LoginView {
@@ -62,7 +61,7 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
     }//signIn()
 
     override fun navigateToMain() {
-        val intent = Intent(this,HomeActivity::class.java)
+        val intent = Intent(this,MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }

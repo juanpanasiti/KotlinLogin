@@ -7,9 +7,9 @@ import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
 import com.alaisoft.loginapp.domain.interactor.auth.signupinteractor.SignUpInteractorImpl
 import com.alaisoft.loginapp.presentation.auth.login.view.LoginActivity
-import com.alaisoft.loginapp.presentation.main.view.HomeActivity
 import com.alaisoft.loginapp.presentation.auth.signup.SignUpContract
 import com.alaisoft.loginapp.presentation.auth.signup.presenter.SignUpPresenter
+import com.alaisoft.loginapp.presentation.main.view.MainActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : BaseActivity(), SignUpContract.SignUpView {
@@ -35,7 +35,7 @@ class SignUpActivity : BaseActivity(), SignUpContract.SignUpView {
     }
 
     override fun navigateToMain() {
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
