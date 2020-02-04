@@ -10,18 +10,27 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import com.alaisoft.loginapp.R
+import com.alaisoft.loginapp.base.BaseActivity
+import com.alaisoft.loginapp.presentation.main.MainContract
+import com.alaisoft.loginapp.presentation.main.presenter.MainPresenter
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity(), MainContract.MainView {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        var presenter = MainPresenter()
+        presenter.attachView(this)
+        presenter.completeUserData()
+
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -45,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
+    override fun getLayout(): Int {
+        return R.layout.activity_main
+    }//getLayout()
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
@@ -54,5 +67,30 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun navigateToLogin() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun signOut() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun completeCurrentUserData(fullname: String?, email: String?) {
+        nav_view.getHeaderView(0).tv_fullname.text = fullname
+        //tv_fullname.text = fullname
+        nav_view.getHeaderView(0).tv_email.text = email
+        //tv_email.text = email
+
+    }
+
+
+    override fun setUserProfilePhoto(url: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showError(errorMsg: String) {
+        toast(this,errorMsg)
     }
 }
