@@ -14,6 +14,7 @@ import com.alaisoft.loginapp.presentation.auth.signup.view.SignUpActivity
 import com.alaisoft.loginapp.presentation.main.view.MainActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), LoginContract.LoginView {
@@ -29,6 +30,8 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
         presenter = LoginPresenter(SignInInteractorImpl())
         presenter.attachView(this)
 
+        checkIfCurrentUser()
+
         btn_login.setOnClickListener {
             signIn()
         }//btn listener
@@ -42,6 +45,12 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
             navigateToRecoverPassword()
         }
     }//onCreate()
+
+    private fun checkIfCurrentUser() {
+        if(FirebaseAuth.getInstance().currentUser != null)
+            toast(this,"Bienvenido de nuevo ${FirebaseAuth.getInstance().currentUser?.displayName}")
+            navigateToMain()
+    }
 
     override fun getLayout(): Int {
         return R.layout.activity_login
