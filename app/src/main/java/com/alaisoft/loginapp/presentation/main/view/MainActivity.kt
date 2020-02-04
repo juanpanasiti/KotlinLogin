@@ -1,5 +1,6 @@
 package com.alaisoft.loginapp.presentation.main.view
 
+import android.net.Uri
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +17,7 @@ import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
 import com.alaisoft.loginapp.presentation.main.MainContract
 import com.alaisoft.loginapp.presentation.main.presenter.MainPresenter
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 
@@ -85,8 +87,11 @@ class MainActivity : BaseActivity(), MainContract.MainView {
     }
 
 
-    override fun setUserProfilePhoto(url: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun setUserProfilePhoto(uri: Uri?) {
+        //showError(uri.toString())
+        //nav_view.getHeaderView(0).iv_userProfilePhoto.setImage
+            //.setImageURI(uri)
+        Glide.with(this).load(uri).into(nav_view.getHeaderView(0).iv_userProfilePhoto)
     }
 
     override fun showError(errorMsg: String) {

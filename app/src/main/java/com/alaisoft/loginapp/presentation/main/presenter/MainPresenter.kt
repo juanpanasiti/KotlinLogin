@@ -1,5 +1,6 @@
 package com.alaisoft.loginapp.presentation.main.presenter
 
+import android.net.Uri
 import com.alaisoft.loginapp.domain.interactor.completeuserdatainteractor.GetUserDataInteractor
 import com.alaisoft.loginapp.domain.interactor.completeuserdatainteractor.GetUserDataInteractorImpl
 import com.alaisoft.loginapp.presentation.auth.login.exceptions.FirebaseLoginException
@@ -44,6 +45,7 @@ class MainPresenter: MainContract.MainPresenter, CoroutineScope {
     override fun completeUserData() {
         var fullname: String
         var email: String
+        var profilePhotoUrl: Uri?
 
         launch {
 
@@ -52,9 +54,11 @@ class MainPresenter: MainContract.MainPresenter, CoroutineScope {
                 currentUser = getUserDataInteractor?.getCurrentUser()
                 fullname = currentUser?.displayName.toString()
                 email = currentUser?.email.toString()
+                profilePhotoUrl = currentUser?.photoUrl
 
                 if(isViewAttached()){
                     view?.completeCurrentUserData(fullname,email)
+                    view?.setUserProfilePhoto(profilePhotoUrl)
                 }
             }catch(e: FirebaseLoginException){
                 if(isViewAttached()){
