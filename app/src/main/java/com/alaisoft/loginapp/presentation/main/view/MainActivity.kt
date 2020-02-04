@@ -82,17 +82,23 @@ class MainActivity : BaseActivity(), MainContract.MainView {
 
     override fun completeCurrentUserData(fullname: String?, email: String?) {
         //Asi se llega a TextView dentro de un fragment desde el activity que lo contiene
-        nav_view.getHeaderView(0).tv_fullname.text = fullname
-        nav_view.getHeaderView(0).tv_email.text = email
-    }
+        if(fullname == "null")
+            nav_view.getHeaderView(0).tv_fullname.text = "Name Error"
+        else
+            nav_view.getHeaderView(0).tv_fullname.text = fullname
+
+
+        if(email != "null")
+            nav_view.getHeaderView(0).tv_email.text = email
+        else
+            nav_view.getHeaderView(0).tv_email.text = "error@email.com"
+    }//completeCurrentUserData
 
 
     override fun setUserProfilePhoto(uri: Uri?) {
-        //showError(uri.toString())
-        //nav_view.getHeaderView(0).iv_userProfilePhoto.setImage
-            //.setImageURI(uri)
-        Glide.with(this).load(uri).into(nav_view.getHeaderView(0).iv_userProfilePhoto)
-    }
+        if(uri.toString() != "null")
+            Glide.with(this).load(uri).into(nav_view.getHeaderView(0).iv_userProfilePhoto)
+    }//setUserProfilePhoto()
 
     override fun showError(errorMsg: String) {
         toast(this,errorMsg)
