@@ -22,17 +22,5 @@ class SignUpInteractorImpl:SignUpInteractor {
             }
         }
 
-        /*FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener {itSignUp ->
-            if(itSignUp.isSuccessful){
-                val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(fullname).build()
-                FirebaseAuth.getInstance().currentUser?.updateProfile(profileUpdates)?.addOnCompleteListener {
-
-                }
-            }else{
-
-            }
-        }//FirebaseAuth listener
-
-         */
     }//signUp()
 }

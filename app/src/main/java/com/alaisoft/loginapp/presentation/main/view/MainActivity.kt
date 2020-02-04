@@ -22,11 +22,12 @@ import kotlinx.android.synthetic.main.nav_header_main.view.*
 class MainActivity : BaseActivity(), MainContract.MainView {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    var presenter = MainPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var presenter = MainPresenter()
+
         presenter.attachView(this)
         presenter.completeUserData()
 
@@ -78,11 +79,9 @@ class MainActivity : BaseActivity(), MainContract.MainView {
     }
 
     override fun completeCurrentUserData(fullname: String?, email: String?) {
+        //Asi se llega a TextView dentro de un fragment desde el activity que lo contiene
         nav_view.getHeaderView(0).tv_fullname.text = fullname
-        //tv_fullname.text = fullname
         nav_view.getHeaderView(0).tv_email.text = email
-        //tv_email.text = email
-
     }
 
 
@@ -92,5 +91,17 @@ class MainActivity : BaseActivity(), MainContract.MainView {
 
     override fun showError(errorMsg: String) {
         toast(this,errorMsg)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        presenter.detachView()
+        presenter.detachJob()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
+        presenter.detachJob()
     }
 }
