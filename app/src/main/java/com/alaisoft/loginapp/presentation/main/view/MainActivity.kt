@@ -1,5 +1,6 @@
 package com.alaisoft.loginapp.presentation.main.view
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -15,10 +16,13 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import com.alaisoft.loginapp.R
 import com.alaisoft.loginapp.base.BaseActivity
+import com.alaisoft.loginapp.presentation.auth.login.view.LoginActivity
 import com.alaisoft.loginapp.presentation.main.MainContract
 import com.alaisoft.loginapp.presentation.main.presenter.MainPresenter
 import com.bumptech.glide.Glide
+import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 class MainActivity : BaseActivity(), MainContract.MainView {
@@ -32,16 +36,23 @@ class MainActivity : BaseActivity(), MainContract.MainView {
 
         presenter.attachView(this)
         presenter.completeUserData()
-
+        //signOut()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+            toast(this,"probando")
+            AuthUI.getInstance().signOut(this).addOnSuccessListener {itSignOut ->
+                navigateToLogin()
+                toast(this,"Cerrando sesión")
+                navigateToLogin()
+            }.addOnFailureListener {itFailure ->
+                toast(this, "Ocurrió un error: ${itFailure.message}")
+            }
+        }//fab.setOnClickListener
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -55,7 +66,12 @@ class MainActivity : BaseActivity(), MainContract.MainView {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+
     }
+
+
 
     override fun getLayout(): Int {
         return R.layout.activity_main
@@ -73,11 +89,13 @@ class MainActivity : BaseActivity(), MainContract.MainView {
     }
 
     override fun navigateToLogin() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     override fun signOut() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO("Implementar la funcion de cierre de sesion")
     }
 
     override fun completeCurrentUserData(fullname: String?, email: String?) {

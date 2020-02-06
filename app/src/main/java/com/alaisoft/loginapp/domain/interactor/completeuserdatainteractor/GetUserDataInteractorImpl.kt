@@ -11,7 +11,7 @@ class GetUserDataInteractorImpl : GetUserDataInteractor {
         var firebaseAuth: FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
 
-        return firebaseAuth.currentUser ?: throw FirebaseAuthException("","")
+        return firebaseAuth.currentUser ?: throw FirebaseAuthException("Error","Error")
 
     }//completeData()
 }

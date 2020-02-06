@@ -66,6 +66,8 @@ class MainPresenter: MainContract.MainPresenter, CoroutineScope {
                     view?.completeCurrentUserData("User Error","error@email.com")
 
                 }
+            }catch(e:Exception){
+                view?.navigateToLogin()
             }
         }//launch
     }//completeUserData()

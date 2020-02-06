@@ -20,17 +20,17 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseActivity(), LoginContract.LoginView {
 
     lateinit var presenter:LoginPresenter
-
+    private val authUser:FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     companion object{
         private const val RC_SIGN_IN = 423
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        checkIfCurrentUser()
         presenter = LoginPresenter(SignInInteractorImpl())
         presenter.attachView(this)
 
-        checkIfCurrentUser()
 
         btn_login.setOnClickListener {
             signIn()
@@ -47,9 +47,12 @@ class LoginActivity : BaseActivity(), LoginContract.LoginView {
     }//onCreate()
 
     private fun checkIfCurrentUser() {
-        if(FirebaseAuth.getInstance().currentUser != null)
-            toast(this,"Bienvenido de nuevo ${FirebaseAuth.getInstance().currentUser?.displayName}")
+        if(authUser.currentUser != null){
             navigateToMain()
+            finish()
+        }else{
+            toast(this,"Inicia sesión o registrate para continuar")
+        }
     }
 
     override fun getLayout(): Int {
