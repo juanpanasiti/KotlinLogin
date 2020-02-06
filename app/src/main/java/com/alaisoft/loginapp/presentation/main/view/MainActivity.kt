@@ -44,14 +44,8 @@ class MainActivity : BaseActivity(), MainContract.MainView {
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
-            toast(this,"probando")
-            AuthUI.getInstance().signOut(this).addOnSuccessListener {itSignOut ->
-                navigateToLogin()
-                toast(this,"Cerrando sesión")
-                navigateToLogin()
-            }.addOnFailureListener {itFailure ->
-                toast(this, "Ocurrió un error: ${itFailure.message}")
-            }
+            signOut()
+
         }//fab.setOnClickListener
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -95,7 +89,13 @@ class MainActivity : BaseActivity(), MainContract.MainView {
     }
 
     override fun signOut() {
-        //TODO("Implementar la funcion de cierre de sesion")
+        AuthUI.getInstance().signOut(this).addOnSuccessListener {itSignOut ->
+            navigateToLogin()
+            toast(this,"Cerrando sesión")
+            navigateToLogin()
+        }.addOnFailureListener {itFailure ->
+            toast(this, "Ocurrió un error: ${itFailure.message}")
+        }
     }
 
     override fun completeCurrentUserData(fullname: String?, email: String?) {
